@@ -1,0 +1,25 @@
+{% extends 'blog/Base.html' %}
+
+{% block title %}
+        Добавить Категорию
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'AddCategory' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for i in form %}
+            <div class="form-group row mb-4">
+                <label for="{{ i.label }}" class="col-sm-3 col-form-label text-right tm-color-primary">{{ i.label }}</label>
+                <div class="col-sm-9">
+                    {{ i }}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="form-group row text-right">
+            <div class="col-12">
+                <button class="tm-btn tm-btn-primary tm-btn-small">Создать</button>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
