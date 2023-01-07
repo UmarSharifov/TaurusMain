@@ -36,7 +36,6 @@ class PostCategoryView(ListView):
         return Post.objects.filter(category_id=self.kwargs['cat_id'])
 
 
-
 class PostDetail(DetailView):
     model = Post
     template_name = 'blog/PostDetail.html'
@@ -49,14 +48,12 @@ class AddPost(CreateView):
     success_url = reverse_lazy('PostList')
 
 
-
 class PostEdit(UpdateView):
     model = Post
     template_name = 'blog/PostCreate.html'
     success_url = reverse_lazy('PostList')
     slug_url_kwarg = 'post_slug'
     fields = '__all__'
-
 
 
 class AddCategory(CreateView):
@@ -78,6 +75,30 @@ class LoginUser(LoginView):
     def get_success_url(self):
         return reverse_lazy('PostList')
 
+
 def logOutUser(request):
     logout(request)
     return redirect('Login')
+
+
+class MovieList(ListView):
+    model = Movie
+    template_name = 'blog/MovieList.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['genre'] = Genre.objects.all()
+        return context
+
+
+class MovieCategoryView(ListView):
+    model = Movie
+    template_name = 'blog/MovieList.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['genre'] = Genre.objects.all()
+        return context
+
+    def get_queryset(self):
+        return Movie.objects.filter(genre_id=self.kwargs['genre_id'])

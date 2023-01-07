@@ -1,0 +1,42 @@
+{% extends 'blog/Base.html' %}
+
+
+{% block title %}
+    Кинотеатр
+{% endblock %}
+
+{% block content %}
+    <div class="row tm-row">
+    <h3>Жанры</h3>
+    {% for gen in genre %}
+        <a href="{% url 'MovieCategory' genre_id=gen.id %}"  class="mb-2 tm-btn tm-btn-primary tm-bg-gray tm-mr-15 tm-color-primary w-25">
+            {{ gen.name }}
+        </a>
+    {% endfor %}
+    </div>
+
+
+    {% for movie in movie_list %}
+        <article class="col-12 col-md-6 tm-post">
+            <hr class="tm-hr-primary">
+            <a href="#" class="effect-lily tm-post-link tm-pt-60">
+                <div class="">
+                    <img src="{{ movie.photo.url }}" alt="Image" class="img-fluid w-50">
+                </div>
+                <span class="position-absolute tm-new-badge">{{ movie.genre }}</span>
+                <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{ movie.title }}</h2>
+            </a>
+            <p class="tm-pt-30">
+                {{ movie.content|truncatewords:20 }}
+            </p>
+            <div class="d-flex justify-content-between tm-pt-45">
+                <span class="tm-color-primary">{{ movie.year }}</span>
+                <span class="tm-color-primary">{{ post.time_create }}</span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+                <span>Автор: {{ movie.user.username }}</span> <span><a href="#">Редактировать</a></span>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock %}

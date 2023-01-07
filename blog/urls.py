@@ -13,4 +13,6 @@ urlpatterns = [
     path('register/', RegisterUser.as_view(), name='Register'),
     path('login/', LoginUser.as_view(), name='Login'),
     path('logout/', logOutUser, name='Logout'),
+    path('movieList/', MovieList.as_view(), name='MovieList'),
+    path('movieCategory/<int:genre_id>/', MovieCategoryView.as_view(), name='MovieCategory'),
 ]
