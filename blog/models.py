@@ -16,7 +16,7 @@ class Post(models.Model):
     title = models.CharField(_('Название'), max_length=255,)
     slug = models.SlugField(_('URL-кодировка'))
     content = models.TextField(_('Содержание'), max_length=5000)
-    photo = models.ImageField(_('Фото'), upload_to=get_image_url)
+    photo = models.ImageField(_('Фото'), upload_to=get_image_url, null=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT, default=User)
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
     time_create = models.DateTimeField(_('date_published'), auto_now_add=True)
